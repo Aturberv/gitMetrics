@@ -6,11 +6,9 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Routes from './Routes.jsx';
 
 
-// render(
-//   <App />, document.getElementById('app')
-//   );
 
-render((
-    <App />
 
-), document.getElementById('app'))
+render(
+  <App />,
+  document.getElementById('app')
+);

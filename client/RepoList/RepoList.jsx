@@ -14,25 +14,21 @@ import {
 
 import Details from "../RepoDetails/Details.jsx";
 
-class RepoList extends React.Component {
-
-  render() {
+const RepoList = (props) => {
     return (
-
       <div className="repos">
         {
-          this.props.repos.map((repo, idx )=> (
-      
-            <Repo 
+          props.repos.map((repo, idx )=> (
+
+            <Repo
               key={idx}
               repo={repo}
               currRepo={this.props.currentRepo}
-            /> 
+            />
           ))
         }
       </div>
     );
-  }
 }
 
 

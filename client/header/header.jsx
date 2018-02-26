@@ -39,7 +39,7 @@ class Header extends Component  {
       </FormGroup>{' '}
       <Button type="submit">Filter</Button>
     </Navbar.Form>
-
+    <Button href="https://github.com/login/oauth/authorize?client_id=91ed1b891b2f4b640e6f&redirect_uri=http://localhost:8081"> Login </Button>
 		<NavItem
 		eventKey={1}
 		href="#">

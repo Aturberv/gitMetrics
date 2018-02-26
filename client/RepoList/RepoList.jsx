@@ -23,7 +23,7 @@ const RepoList = (props) => {
             <Repo
               key={idx}
               repo={repo}
-              currRepo={this.props.currentRepo}
+              currRepo={props.currentRepo}
             />
           ))
         }

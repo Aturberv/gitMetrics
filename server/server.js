@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const passport = require('passport');
+// const passport = require('passport');
 const oAuthPassport = require('./auth');
 const session = require('express-session');
 const repoController = require('./repo/repoController');
@@ -15,6 +15,7 @@ mongoose.connect(mongoURI);
 app.use(bodyParser.json());
 
 app.use(function(req, res, next) {
+  console.log(req.method, req.url);
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
@@ -25,8 +26,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.get('/getRepos', repoController.getAllRepos);
 

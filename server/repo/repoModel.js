@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var repoSchema = new Schema({
+const repoSchema = new Schema({
   forks: {type: Number}, // (# of forks)
   open_issues: {type: Number}, // (# of issues open)
   watchers: {type: Number}, // (# of watchers open)

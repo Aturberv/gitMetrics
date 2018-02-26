@@ -33,7 +33,7 @@ class App extends Component {
     fetch("http://localhost:8081/getRepos")
     .then(res => res.json())
     .then(repos => {
-			// console.log(repos); 
+			console.log(repos); 
 			this.setState({ repos });
 		})
     // .then(res => {console.log(this.state)})

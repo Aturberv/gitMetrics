@@ -9,7 +9,7 @@ const repoController = require('./repo/repoController');
 
 const app = express();
 
-const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfirescratchproject';
+const mongoURI = 'mongodb://iterationDeep:teamiterationdeep1@ds249798.mlab.com:49798/iteration_deep';
 mongoose.connect(mongoURI);
 
 app.use(bodyParser.json());

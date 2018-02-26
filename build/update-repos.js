@@ -1,64 +1,62 @@
 const fetch = require('isomorphic-fetch');
 const fs = require('fs');
 const Repo = require('../server/repo/repoModel.js')
-const client_id = process.env.GH_CLIENT_ID
+const client_id = process.env.GH_CLIENT_ID;
+const client_secret = process.env.GH_CLIENT_SECRET;
 const mongoose = require('mongoose');
 const beginnerRepos = {
-	moby: 'moby/moby',
-	node: 'nodejs/node',
-	atom: 'atom/atom',
-	django: 'django/django',
-	rustLang: 'rust-lang/rust',
-	homebrew: 'Homebrew/brew',
-	howdyai: 'howdyai/botkit',
-	middleman: 'middleman/middleman',
-	zulip: 'zulip/zulip',
-	exercism: 'exercism/exercism.io',
-	hospitalRun: 'HospitalRun/hospitalrun-frontend',
-	hoodie: 'hoodiehq/hoodie',
-	pybee: 'pybee/batavia'
+	// moby: 'moby/moby',
+	// node: 'nodejs/node',
+	// atom: 'atom/atom',
+	reactNative: 'facebook/react-native'
+	// django: 'django/django',
+	// rustLang: 'rust-lang/rust',
+	// homebrew: 'Homebrew/brew',
+	// howdyai: 'howdyai/botkit',
+	// middleman: 'middleman/middleman',
+	// zulip: 'zulip/zulip',
+	// exercism: 'exercism/exercism.io',
+	// hospitalRun: 'HospitalRun/hospitalrun-frontend',
+	// hoodie: 'hoodiehq/hoodie',
+	// pybee: 'pybee/batavia'
 }
 
-const mongoURI = 'mongodb://teamfirrre:teamfire1@ds245518.mlab.com:45518/teamfirescratchproject';
+// console.log(client_id, client_secret);
+const mongoURI = 'mongodb://iterationDeep:teamiterationdeep1@ds249798.mlab.com:49798/iteration_deep';
 mongoose.connect(mongoURI, {useMongoClient: true})
 
 const repoObj = {};
 
 function parseData(repo) {
-	return new Promise((resolve, reject) => {
-	return fetch(`https://api.github.com/repos/${repo}?client_id=${client_id}`)
-	.then((res) => res.json())
-	.then((data) => {
-		console.log('data', data)
-		let info = repo.split('/')
-		repoObj[info[1]] = {
-			org: info[0],
-			forks: data.forks,
-			open_issues: data.open_issues,
-			watchers: data.watchers,
-			url: data.html_url,
-			avatar: data.avatar_url,
-			description: data.description
-		}
-	})
-	.then(() => { parseLanguages(repo) })
-	.then(() => { parseIssues(repo) })
-	.then(() => { resolve() })
-	.catch((err) => {reject(err)})
-	})
+		return fetch(`https://api.github.com/repos/${repo}?client_id=${client_id}&client_secret=${client_secret}`)
+		.then((res) => res.json())
+		.then((data) => {
+			// console.log('data', data);
+			let info = repo.split('/')
+			repoObj[info[1]] = {
+				org: info[0],
+				forks: data.forks,
+				open_issues: data.open_issues,
+				watchers: data.watchers,
+				url: data.html_url,
+				avatar: data.avatar_url,
+				description: data.description
+			}
+		})
+		.catch((err) => {console.log('parseData',err);})
 }
 
 function parseLanguages(repo) {
 	return fetch(`https://api.github.com/repos/${repo}/languages?client_id=${client_id}`)
 	.then((res) => res.json())
 	.then((data) => {
-		console.log('lang', data)
-		let info = repo.split('/')
+		console.log('lang', data);
+		let info = repo.split('/');
 		let languageArr = [];
-		languageArr.push(data)
-		repoObj[info[1]].languages = languageArr
+		languageArr.push(data);
+		repoObj[info[1]].languages = languageArr;
 	})
-	.catch((err) => {console.log(err)})
+	.catch((err) => {console.log('parseLanguages',err);})
 }
 
 function parseIssues(repo) {
@@ -82,7 +80,7 @@ function parseIssues(repo) {
 		repoObj[info[1]].issues = issueArr
 		return repoObj
 	})
-	.catch((err) => {console.log(err)})
+	.catch((err) => {console.log('parseIssues',err)})
 }
 
 function repoStore(repo) {
@@ -102,23 +100,20 @@ function repoStore(repo) {
 				console.log(err)
 				reject('rejected')
 			} else {
-				console.log(repoDB)
 				resolve('success')
 			}
 		})
-		// if(err) reject(err)
-		// else resolve()
+
 	})
 }
 
-// Object.keys(beginnerRepos).forEach((repo) => {
-// 	repoStore(repo)
-// })
 
 let promises = [];
 
 Object.keys(beginnerRepos).forEach((repo) => {
-	promises.push(parseData(beginnerRepos[repo]))
+	promises.push(parseData(beginnerRepos[repo]));
+	promises.push(parseLanguages(beginnerRepos[repo]));
+	promises.push(parseIssues(beginnerRepos[repo]));
 })
 
 Promise.all(promises).then(() => {

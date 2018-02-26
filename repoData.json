@@ -1,0 +1,41 @@
+{
+    "react-native": {
+        "org": "facebook",
+        "forks": 13845,
+        "open_issues": 435,
+        "watchers": 60302,
+        "url": "https://github.com/facebook/react-native",
+        "description": "A framework for building native apps with React.",
+        "languages": [
+            {
+                "JavaScript": 4136991,
+                "Java": 3072671,
+                "Objective-C": 1696510,
+                "C++": 917838,
+                "Objective-C++": 260971,
+                "HTML": 162406,
+                "Python": 127279,
+                "Shell": 45811,
+                "C": 44608,
+                "Assembly": 14888,
+                "Ruby": 13849,
+                "Makefile": 7402,
+                "IDL": 2122,
+                "CSS": 1116,
+                "Kotlin": 698,
+                "Batchfile": 430,
+                "Prolog": 287
+            }
+        ],
+        "issues": [
+            {
+                "CLA Signed": 6,
+                "cla signed": 6,
+                "Import Started": 1,
+                "Ran Commands": 1,
+                "no-template": 1,
+                "Core Team": 1
+            }
+        ]
+    }
+}

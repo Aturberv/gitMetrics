@@ -1,5 +1,5 @@
 import Header from './header/header.jsx';
-import RepoList from './RepoList/RepoList.jsx'
+import List from './List/List.jsx'
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
 import { Grid } from 'react-bootstrap';
@@ -22,63 +22,64 @@ class App extends Component {
     super(props);
 
     this.state = {
-      repos: [],
-      currentRepo: null
+      orgs: [],
+      currentRepo: null,
+			currentOrg: null
     };
 
-    this.getCurrentRepo = this.getCurrentRepo.bind(this)
+    this.getCurrentOrganization = this.getCurrentOrganization.bind(this)
   }
 
   componentDidMount() {
-    fetch("http://localhost:8081/getRepos")
+    fetch("http://localhost:8081/getAllInfo")
     .then(res => res.json())
-    .then(repos => {
-			console.log(repos); 
-			this.setState({ repos });
+    .then( orgs => {
+			// console.log(repos);
+			this.setState({ orgs });
 		})
     // .then(res => {console.log(this.state)})
   }
 
-  getTest(){
-    axios({
-      method: 'get',
-      url: 'http://localhost:8081/login',
-      // headers: {'Access-Control-Allow-Origin': 'http://localhost:8081/'}
-  })
-    .then(function(response){
-      console.log('response')
-      console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    });
-  }
-
   getCurrentRepo(curr) {
     console.log(curr)
-    this.setState({currentRepo: curr})
+    this.setState({currentRepo: curr});
   }
+
+	getCurrentOrg(curr) {
+		this.setState({currentOrg: curr});
+	}
 
   render() {
     return (
       <div>
         {
-          this.state.currentRepo ?
+					this.state.currentRepo ?
+						<RepoDetails details={this.state.currentRepo} />
+					:
+					(
+          this.state.currentOrg ?
             <div>
               <Header />
-              <RepoDetails details={this.state.currentRepo} />
+							<Aggregate />
+								<Grid id="content">
+	                <List getCurrent={this.getCurrentRepo} items={this.state.currentOrg.repo} />
+	              </Grid>
             </div>
             :
             <div>
               <Header />
               <Grid id="content">
-                <RepoList currentRepo={this.getCurrentRepo} repos={this.state.repos} />
+                <List getCurrent={this.getCurrentOrg} items={this.state.orgs} />
               </Grid>
             </div>
+					)
         }
         </div>
+
       );
   }
+
+
 }
 
 

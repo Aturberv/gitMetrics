@@ -18,15 +18,14 @@ const RepoList = (props) => {
     return (
       <div className="repos">
         {
-          props.repos.map((repo, idx )=> (
-
-            <Repo
-              key={idx}
-              repo={repo}
-              currRepo={props.currentRepo}
-            />
-          ))
-        }
+            props.items.map((item, idx)=> (
+              <Box
+                key={idx}
+                item={item}
+                getCurrent={props.getCurrent}
+              />
+            ))
+          }
       </div>
     );
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavItem, Glyphicon, FormControl, FormGroup, Button} from 'react-bootstrap';
+import './header.css';
+const client_id = "002c7138176488b1957e";//process.env.GH_CLIENT_ID;
 
-import './header.css'
+
 
 class Header extends Component  {
 
@@ -26,7 +28,7 @@ class Header extends Component  {
 		<Navbar.Header>
 		<Navbar.Brand>
 		<a href="/">
-		Github Open Source Projects
+			Github Open Source Projects
 		</a>
 		</Navbar.Brand>
 		<Navbar.Toggle />
@@ -39,7 +41,7 @@ class Header extends Component  {
       </FormGroup>{' '}
       <Button type="submit">Filter</Button>
     </Navbar.Form>
-    <Button href="https://github.com/login/oauth/authorize?client_id=91ed1b891b2f4b640e6f&redirect_uri=http://localhost:8081"> Login </Button>
+    <Button href={`https://github.com/login/oauth/authorize?client_id=${client_id}&redirect_uri=http://localhost:8081`}> Login </Button>
 		<NavItem
 		eventKey={1}
 		href="#">

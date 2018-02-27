@@ -31,9 +31,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8081/getRepos")
+    fetch("http://localhost:8081/getAllInfo")
     .then(res => res.json())
-    .then(repos => {
+    .then( orgs => {
 			// console.log(repos);
 			this.setState({ orgs });
 		})

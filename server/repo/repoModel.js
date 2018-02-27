@@ -1,17 +1,15 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var repoSchema = new Schema({
-  forks: {type: Number}, // (# of forks)
-  open_issues: {type: Number}, // (# of issues open)
-  watchers: {type: Number}, // (# of watchers open)
-  url: {type: String}, // (actual url of repo)
-  description: {type: String},
-  languages: {type: Array},
-  issues: {type: Array},
-  org: {type: String},
-  name: {type: String },
-  avatar: {type: String}
+const repoSchema = new Schema({
+  orgName:         {type: String, required: true},
+  repoName:        {type: String, required: true},
+  description:     {type: String},
+  open_issues:     {type: Number},
+  forks:           {type: Number},
+  watchers:        {type: Number},
+  languages:       {type: Object},
+  contributos:     {type: Array}
 });
 
 module.exports = mongoose.model('Repo', repoSchema);

@@ -1,26 +1,44 @@
-const Org = require('./../orgs/orgModel');
+const Org = require('./orgModel');
+const Repo = require('./../repo/repoModel');
+const repoController = require('./../repo/repoController');
 
 const orgController = {};
 
-orgController.getAllOrgs = (req, res) => {
-  Repo.find({}, function(err, orgs) {
+orgController.getAllInfo = (req, res) => {
+  const allInfo = {};
+  Org.find({}, function(err, orgs) {
     if (err) {
-    console.log('getting orgs err ', err);
-    return res.send(500, err);
-  }
-    return res.jsonp(orgs);
+      console.log('getting orgs err ', err);
+      return res.send(500, err);
+    }
+    const initialProms = [];
+    for (let org of orgs {
+      initialProms.push(combineOrgRepo(org));
+    }
+    Promise.all(initialProms)
+      .then( (newOrgs) => {
+        res.jsonp(newOrgs);
+      })
+      .catch( (err) => console.log(err) )
   });
 }
 
-orgController.createOrg = (organization) => {
-  // console.log('ORGANIZATION', organization);
-  const orgObj = new Org({
-    name:       organization.name.toLowerCase(),
-    num_repos:  organization.public_repos,
-    avatar_url: organization.avatar_url
+function combineOrgRepo(org) {
+  return new Promise((resolve, reject) => {
+    Repo.find({orgName: org.name}, (err, reposArr) => {
+      if (err) reject('ERR combineOrgRepo');
+      org.repos = reposArr;
+      resolve(org);
+    });
   });
-  Org.find({name:organization.name.toLowerCase()}, (err, result) => {
-    if (!result.length) orgObj.save();
+}
+
+
+orgController.createOrg = (orgObj) => {
+  // console.log('ORGANIZATION', organization);
+  Org.find({name:orgObj.name}, (err, result) => {
+    if (err) console.log('ERR create ORGANIZATION',err);
+    if (!result.length) Org.create(orgObj);
   });
 }
 

@@ -3,9 +3,9 @@ const client_secret = process.env.GH_CLIENT_SECRET;
 const client_id = process.env.GH_CLIENT_ID;
 const orgController = require('./../orgs/orgController');
 const repoController = require('./../repo/repoController');
+
+
 const userController = {};
-
-
 
 function getTokenFromGithub(req, res) {
   const code = req.query.code;
@@ -56,20 +56,18 @@ userController.getOneOrg = (req, res, next) => {
   fetch(giturl, res.locals.optionsFetch)
     .then( response => response.json() )
     .then( organization => {
-      res.locals.orgName = organization.name.toLowerCase(),
-      res.locals.repos_url = organization.repos_url;
-      res.locals.num_repos = organization.public_repos;
-      orgController.createOrg(organization);
+      res.locals.organization = organization;
+      // console.log(res.locals.organization.name.toLowerCase());
     })
     .then( () => {next();})
     .catch( err => console.log('fetchAPI failer', err) )
 }
 
 userController.getReposInfo = (req, res, next) => {
-  const repoPages = Math.ceil(res.locals.num_repos/30);
+  const repoPages = Math.ceil(res.locals.organization.public_repos/30);    // public_repos --- number of total repos
   const initialProms = [];
   for (let i=1; i <= repoPages; i++) {
-    initialProms.push(fetchRequest('repo', res.locals.repos_url + `?page=${i}`, res.locals.optionsFetch));
+    initialProms.push(fetchRequest('repo', res.locals.organization.repos_url + `?page=${i}`, res.locals.optionsFetch));
   }
   Promise.all(initialProms)
     .then( (result) => {
@@ -84,13 +82,9 @@ userController.getReposInfo = (req, res, next) => {
 
 
 userController.langAndContr = (req, res, next) => {
-  // repoObj = {
-  //   orgName: res.locals.orgName,
-  //   name: res.locals.allrepos[0].name
-  // }
   const initialProms = [];
 
-  for (let i=0; i < res.locals.allrepos.length - 177; i++) {
+  for (let i=0; i < res.locals.allrepos.length; i++) {
     initialProms.push(fetchRequest('language', res.locals.allrepos[i].languages_url, res.locals.optionsFetch));
     initialProms.push(fetchRequest('contributor', res.locals.allrepos[i].contributors_url, res.locals.optionsFetch));
   }
@@ -107,10 +101,7 @@ userController.langAndContr = (req, res, next) => {
         allContr.push(contrs);
         allLang.push(result[i]); //language Obj
       }
-      console.log(res.locals.allrepos[0])
-      console.log(allLang[1]);
-      console.log(allContr[0]);
-      repoController.createRepos(res.locals.orgName, res.locals.allrepos, allLang, allContr);
+      repoController.createRepos(res.locals.organization, res.locals.allrepos, allLang, allContr);
     })
     .then( () => next() )
     .catch( (err) => console.log(err) )

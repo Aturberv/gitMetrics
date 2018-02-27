@@ -1,5 +1,5 @@
 const Repo = require('./repoModel');
-
+const orgController = require('./../orgs/orgController');
 const repoController = {};
 
 repoController.getAllRepos = (req, res) => {
@@ -13,42 +13,68 @@ repoController.getAllRepos = (req, res) => {
 }
 
 
-repoController.createRepos = (orgName, allrepos, allLang, allContr) => {
+repoController.createRepos = (organization, allrepos, allLang, allContr) => {
+  // console.log(organization, allrepos[4], allLang[4], allContr[4][1]);
+  const orgName = organization.name.toLowerCase();
   Repo.find({orgName: orgName}, (err, result) => {
     console.log(result.length, allrepos.length, allLang.length, allContr.length)
     if (result.length !== allrepos.length) {
-      if (result.length !== 0) Org.remove({orgName: orgName}, (err) => {
+      Repo.remove({orgName: orgName}, (err) => {
         if (err) console.log('Remove Repo ERR', err);
-        else createAll();
+        createAll();
       });
     }
   });
 
+
   function createAll() {
     const arrRepos = [];
+    let totalForks = 0;
+    let totalWatchers = 0;
+    let totalOpenIssues = 0;
+    const totalLanguages = {};
     for (let i=0; i < allrepos.length; i++) {
-      const repoObj = new Repo({
-        orgName:       orgName
-        // repoName:
-      });
-
+      totalForks += allrepos[i].forks;
+      totalWatchers += allrepos[i].watchers;
+      totalOpenIssues += allrepos[i].open_issues;
+      combineLang(allLang[i]);
+      const repoObj = {
+        orgName:       orgName,
+        repoName:      allrepos[i].name,
+        description:   allrepos[i].description,
+        open_issues:   allrepos[i].open_issues,
+        forks:         allrepos[i].forks,
+        watchers:      allrepos[i].watchers,
+        languages:     allLang[i],
+        contributos:   allContr[i]
+      };
+      arrRepos.push(repoObj);
     }
+    Repo.create(arrRepos, (err, result) => {
+      if (err) console.log('Create Repo ERR',err)
+      console.log('Repo Length Created: ', result.length);
+    });
 
+    const orgObj = {
+      name:               orgName,
+      num_repos:          organization.public_repos,
+      avatar_url:         organization.avatar_url,
+      totalForks:         totalForks,
+      totalWatchers:      totalWatchers,
+      totalOpenIssues:    totalOpenIssues,
+      totalLanguages:     totalLanguages
+    }
+    orgController.createOrg(orgObj);
+
+    function combineLang(langObj) {
+      for (let language in langObj) {
+        if (totalLanguages[language]) totalLanguages[language] += langObj[language];
+        else totalLanguages[language] = langObj[language]
+      }
+    }
   }
 
-
-
 }
-
-// repoName:        {type: String, required: true},
-// forks:           {type: Number},
-// open_issues:     {type: Number}, // (# of issues open)
-// watchers:        {type: Number}, // (# of watchers open)
-// url:             {type: String}, // (actual url of repo)
-// description:     {type: String},
-// languages:       {type: Array},
-// issues:          {type: Array},
-// avatar:          {type: String}
 
 
 

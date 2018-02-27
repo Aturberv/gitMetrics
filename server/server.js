@@ -29,7 +29,7 @@ app.use(session({
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-app.get('/getRepos', repoController.getAllRepos);
+app.get('/getOrganizations', repoController.getAllRepos);
 
 app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }));
 

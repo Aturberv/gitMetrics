@@ -12,8 +12,8 @@ import RepoDetails from '../RepoDetails/Details.jsx';
 
 function Repo(props) {
   let {
-    currRepo,
-    repo
+    getCurrent,
+    item
   } = props;
 
 
@@ -25,30 +25,31 @@ function Repo(props) {
       <Panel className="repo" >
         <div className="repo-img-wrapper">
             <img
-              alt={repo.org}
+              alt={item.name}
               className="img-responsive repo-img"
-              src={`${repo.avatar}`}
-              onClick={() => { currRepo(repo) } }
+              src={`${item.avatar}`}
+              onClick={() => {
+                getCurrent(item)
+              }
                />
         </div>
 
         <h4
           className="ellipsis"
-          title={repo.name}
+          title={item.name}
           >
-          <a href={`${repo.url}`}>
-            {repo.name}
+          <a href={`${item.url}`}>
+            {item.name}
           </a>
         </h4>
 
         <h5
           className="ellipsis repo-brand-name"
-          title={repo.name}>
-          {`by ${repo.org}`}
+          title={item.name}>
         </h5>
 
         <div className="pull-right h4 repo-link">
-          {`${repo.name}`}
+          {`${item.name}`}
         </div>
 
       </Panel>

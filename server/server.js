@@ -1,11 +1,13 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 // const passport = require('passport');
 const oAuthPassport = require('./auth');
 const session = require('express-session');
 const repoController = require('./repo/repoController');
+const userController = require('./user/userController');
 
 const app = express();
 
@@ -13,6 +15,7 @@ const mongoURI = 'mongodb://iterationDeep:teamiterationdeep1@ds249798.mlab.com:4
 mongoose.connect(mongoURI);
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(function(req, res, next) {
   console.log(req.method, req.url);
@@ -36,9 +39,15 @@ app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https:
 // add logout route that removes user from users collection in db
 // app.get('/signout', );
 
-app.get('/', (req, res) => {
+app.get('/', userController.getToken,
+             userController.getOneOrg,
+             userController.getReposInfo,
+             userController.langAndContr,
+             redirectToClientServer);
+
+function redirectToClientServer(req, res) {
   res.redirect('http://localhost:8080/');
-})
+}
 
 app.listen(8081, () => {
   console.log("server listening on 8081");

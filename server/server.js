@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const oAuthPassport = require('./auth');
 const session = require('express-session');
 const repoController = require('./repo/repoController');
+const orgController = require('./orgs/orgController');
 const userController = require('./user/userController');
 
 const app = express();

@@ -12,7 +12,7 @@ orgController.getAllInfo = (req, res) => {
       return res.send(500, err);
     }
     const initialProms = [];
-    for (let org of orgs {
+    for (let org of orgs) {
       initialProms.push(combineOrgRepo(org));
     }
     Promise.all(initialProms)

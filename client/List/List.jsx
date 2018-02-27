@@ -1,24 +1,15 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
-import Repo from '../Repo/Repo.jsx';
-import './RepoList.css'
-import RepoDetails from "../RepoDetails/Details.jsx";
+import Box from '../Box/Box.jsx';
+import './List.css';
 
-import {
-  BrowserRouter,
-  Route,
-  NavLink,
-  HashRouter,
-  Link,
-} from "react-router-dom";
 
-import Details from "../RepoDetails/Details.jsx";
-
-const RepoList = (props) => {
+const List = (props) => {
     return (
+
       <div className="repos">
         {
-            props.items.map((item, idx)=> (
+            props.items.map((item, idx) => (
               <Box
                 key={idx}
                 item={item}
@@ -32,4 +23,4 @@ const RepoList = (props) => {
 
 
 
-export default RepoList;
+export default List;

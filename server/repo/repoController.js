@@ -40,7 +40,7 @@ repoController.createRepos = (organization, allrepos, allLang, allContr) => {
       combineLang(allLang[i]);
       const repoObj = {
         orgName:       orgName,
-        repoName:      allrepos[i].name,
+        name:          allrepos[i].name,
         description:   allrepos[i].description,
         open_issues:   allrepos[i].open_issues,
         forks:         allrepos[i].forks,

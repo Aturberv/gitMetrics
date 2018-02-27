@@ -24,11 +24,20 @@ orgController.getAllInfo = (req, res) => {
 }
 
 function combineOrgRepo(org) {
+  const newOrg = {
+    name:             org.name,
+    num_repos:        org.num_repos,
+    avatar_url:       org.avatar_url,
+    totalForks:       org.totalForks,
+    totalWatchers:    org.totalWatchers,
+    totalOpenIssues:  org.totalOpenIssues,
+    totalLanguages:   org.totalLanguages,
+  };
   return new Promise((resolve, reject) => {
     Repo.find({orgName: org.name}, (err, reposArr) => {
       if (err) reject('ERR combineOrgRepo');
-      org.repos = reposArr;
-      resolve(org);
+      newOrg.repos = reposArr;
+      resolve(newOrg);
     });
   });
 }

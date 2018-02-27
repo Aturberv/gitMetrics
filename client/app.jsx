@@ -5,7 +5,7 @@ import ReactDom from "react-dom";
 import { Grid } from 'react-bootstrap';
 import Routes from './Routes.jsx';
 import axios from 'axios';
-
+import Aggregate from './Aggregate/Aggregate.jsx'
 // import {
 //   Route,
 //   NavLink,
@@ -26,8 +26,8 @@ class App extends Component {
       currentRepo: null,
 			currentOrg: null
     };
-
-    this.getCurrentOrganization = this.getCurrentOrganization.bind(this)
+		this.getCurrentRepo = this.getCurrentRepo.bind(this);
+    this.getCurrentOrg = this.getCurrentOrg.bind(this);
   }
 
   componentDidMount() {
@@ -41,11 +41,11 @@ class App extends Component {
   }
 
   getCurrentRepo(curr) {
-    console.log(curr)
     this.setState({currentRepo: curr});
   }
 
 	getCurrentOrg(curr) {
+		console.log(curr);
 		this.setState({currentOrg: curr});
 	}
 
@@ -62,7 +62,7 @@ class App extends Component {
               <Header />
 							<Aggregate />
 								<Grid id="content">
-	                <List getCurrent={this.getCurrentRepo} items={this.state.currentOrg.repo} />
+	                <List getCurrent={this.getCurrentRepo} items={this.state.currentOrg.repos} />
 	              </Grid>
             </div>
             :

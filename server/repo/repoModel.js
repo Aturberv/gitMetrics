@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const repoSchema = new Schema({
   orgName:         {type: String, required: true},
-  repoName:        {type: String, required: true},
+  name:            {type: String, required: true},
   description:     {type: String},
   open_issues:     {type: Number},
   forks:           {type: Number},

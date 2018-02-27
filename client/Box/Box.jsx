@@ -1,8 +1,7 @@
 import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
-import './Repo.css'
-import {BrowserRouter, Link, Route} from 'react-router-dom';
-import RepoDetails from '../RepoDetails/Details.jsx';
+import './Box.css'
+
 
 // const divStyle = {
 //   background-color: 'blue',
@@ -10,7 +9,7 @@ import RepoDetails from '../RepoDetails/Details.jsx';
 
 
 
-function Repo(props) {
+function Box(props) {
   let {
     getCurrent,
     item
@@ -30,8 +29,8 @@ function Repo(props) {
               src={`${item.avatar}`}
               onClick={() => {
                 getCurrent(item)
-              }
-               />
+              }}
+            />
         </div>
 
         <h4
@@ -63,4 +62,4 @@ function Repo(props) {
 // };
 
 
-export default Repo;
+export default Box;

@@ -14,7 +14,7 @@ repoController.getAllRepos = (req, res) => {
 
 
 repoController.createRepos = (organization, allrepos, allLang, allContr) => {
-  // console.log(organization, allrepos[4], allLang[4], allContr[4][1]);
+  // console.log(organization);
   const orgName = organization.name.toLowerCase();
   Repo.find({orgName: orgName}, (err, result) => {
     console.log(result.length, allrepos.length, allLang.length, allContr.length)

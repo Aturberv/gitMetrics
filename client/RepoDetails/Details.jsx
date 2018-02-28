@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import './Details.css'
+import Header from '../header/header.jsx';
 import d3 from 'd3';
 const PieChart = require('react-d3-components').PieChart;
 
@@ -7,25 +8,33 @@ const data = [];
 
 const Details = (details) => {
   console.log(details.details.languages)
-  Object.keys(details.details.languages).forEach((language) => {
-    let obj = {};
-    data.push({x: language, y: details.details.languages[language]})
-  })
+  if(details.details.languages){
+    Object.keys(details.details.languages).forEach((language) => {
+      data.push({x: language, y: details.details.languages[language]})
+    })
+  }
   return (
     <div>
-      <PieChart
-        data={{
-          label: 'languages',
-          values: data 
-        }}
-        width={600}
-        height={600}
-        margin={{top: 10, bottom: 10, left: 100, right: 100}}
-        tooltipOffset={{top: 100, left:150}}
-        tooltipHtml={(x, y) => { return `${x}: ${y}`}}
-        tooltipMode={'fixed'}
-        sort={null}
-      />
+      <Header />
+      {
+      details.details.languages &&
+        <PieChart
+          data={{
+            label: 'languages',
+            values: data
+          }}
+          width={600}
+          height={600}
+          margin={{top: 10, bottom: 10, left: 100, right: 100}}
+          tooltipOffset={{top: 200, left:1050}}
+          tooltipHtml={ function(x, y) {
+            // console.log(x, y)
+            return `${x}: ${y}`;
+          }}
+          tooltipMode={'fixed'}
+          sort={null}
+          />
+      }
       <h2>{details.details.orgName}: {details.details.name}</h2>
       <p>{details.details.description}</p>
       <ol>

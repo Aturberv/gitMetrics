@@ -15,6 +15,7 @@ function Box(props) {
     item
   } = props;
 
+  // console.log('Box', item);
 
   return (
     <Col
@@ -26,10 +27,8 @@ function Box(props) {
             <img
               alt={item.name}
               className="img-responsive repo-img"
-              src={`${item.avatar}`}
-              onClick={() => {
-                getCurrent(item)
-              }}
+              src={ item.avatar_url ? `${item.avatar_url}` : "https://avatars1.githubusercontent.com/u/2735905?s=400&v=4"}
+
             />
         </div>
 
@@ -37,7 +36,10 @@ function Box(props) {
           className="ellipsis"
           title={item.name}
           >
-          <a href={`${item.url}`}>
+          <a
+            onClick={() => {
+              getCurrent(item)
+            }}>
             {item.name}
           </a>
         </h4>

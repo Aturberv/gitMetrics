@@ -46,7 +46,7 @@ userController.getToken = (req, res, next) => {
 }
 
 userController.getOneOrg = (req, res, next) => {
-  const org = 'facebook';
+  const org = 'uber';
   const giturl = `https://api.github.com/orgs/${org}`;
   res.locals.optionsFetch = {
     method: 'GET',
@@ -82,9 +82,10 @@ userController.getReposInfo = (req, res, next) => {
 
 
 userController.langAndContr = (req, res, next) => {
+  // deleteOneRepo('paddle_paddle_model_zoo', res);
   const initialProms = [];
-
   for (let i=0; i < res.locals.allrepos.length; i++) {
+    // if (res.locals.allrepos[i].name === 'paddle_paddle_model_zoo') console.log(res.locals.allrepos[i]);
     initialProms.push(fetchRequest('language', res.locals.allrepos[i].languages_url, res.locals.optionsFetch));
     initialProms.push(fetchRequest('contributor', res.locals.allrepos[i].contributors_url, res.locals.optionsFetch));
   }
@@ -112,12 +113,19 @@ function fetchRequest( purpose, url, options) {
     fetch(url, options)
       .then( response => response.json() )
       .then(   (data) => resolve(data) )
-      .catch(      () => reject(`ERR in ${purpose} Request`))
+      // .catch(      () => resolve([]) )
+      .catch(   (err) => reject(`ERR in ${purpose} Request ${url} ${err}`))
   });
 }
 
 
-
+function deleteOneRepo(repoName, res) {
+  let idx;
+  for (idx=0; idx < res.locals.allrepos.length; idx++) {
+    if (res.locals.allrepos[idx].name === repoName) break;
+  }
+  res.locals.allrepos.splice(idx,1);
+}
 
 
 

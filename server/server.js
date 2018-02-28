@@ -35,11 +35,11 @@ app.use(session({
 
 app.get('/getAllInfo', orgController.getAllInfo);
 
-app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }));
+// app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }));
 
 // add logout route that removes user from users collection in db
 // app.get('/signout', );
-
+// 
 // app.get('/', userController.getToken,
 //              userController.getOneOrg,
 //              userController.getReposInfo,

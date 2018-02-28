@@ -4,7 +4,7 @@ import React from 'react';
 
 const Aggregate = (props) => {
   return (
-    <div classname="aggregate">
+    <div className="aggregate">
       <a href="#">{props.stats}</a>
     </div>
   )

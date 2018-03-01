@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import './Details.css'
 import Header from '../header/header.jsx';
-import d3 from 'd3';
-
 import {
   RadialChart,
   Hint,

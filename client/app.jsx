@@ -3,18 +3,12 @@ import List from './List/List.jsx'
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
 import { Grid } from 'react-bootstrap';
-import Routes from './Routes.jsx';
-import axios from 'axios';
 import Aggregate from './Aggregate/Aggregate.jsx'
 import './app.css';
-// import {
-//   Route,
-//   NavLink,
-//   HashRouter
-// } from "react-router-dom";
 
 
-// import RepoList from "../RepoList/RepoList.jsx";
+
+
 import RepoDetails from "./RepoDetails/Details.jsx";
 
 

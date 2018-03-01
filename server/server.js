@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 // const passport = require('passport');
-const oAuthPassport = require('./auth');
-const session = require('express-session');
+// const oAuthPassport = require('./auth');
+// const session = require('express-session');
 const repoController = require('./repo/repoController');
 const orgController = require('./orgs/orgController');
 const userController = require('./user/userController');
@@ -24,22 +24,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-}));
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 app.get('/getAllInfo', orgController.getAllInfo);
 
-// app.get('/auth', oAuthPassport.authenticate('oauth2', { failureRedirect: 'https://www.google.com/' }));
 
-// add logout route that removes user from users collection in db
-// app.get('/signout', );
-// 
 // app.get('/', userController.getToken,
 //              userController.getOneOrg,
 //              userController.getReposInfo,
@@ -47,6 +34,7 @@ app.get('/getAllInfo', orgController.getAllInfo);
 //              redirectToClientServer);
 
 app.get('/', redirectToClientServer);
+
 
 
 

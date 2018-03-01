@@ -1,4 +1,3 @@
-import { Col, Panel } from 'react-bootstrap';
 import React, { Component } from 'react';
 import Box from '../Box/Box.jsx';
 import './List.css';

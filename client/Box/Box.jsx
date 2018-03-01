@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import './Box.css'
 
 
-// const divStyle = {
-//   background-color: 'blue',
-// };
 
 
 
@@ -14,8 +11,6 @@ function Box(props) {
     getCurrent,
     item
   } = props;
-
-  // console.log('Box', item);
 
   return (
     <Col
@@ -49,10 +44,6 @@ function Box(props) {
 
   );
 }
-
-// Repo.propTypes = {
-//   repo: React.PropTypes.object.isRequired
-// };
 
 
 export default Box;

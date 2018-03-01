@@ -1,4 +1,3 @@
-import { Col, Panel } from 'react-bootstrap';
 import React from 'react';
 
 

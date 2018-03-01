@@ -23,8 +23,6 @@
     "chai": "^3.5.0",
     "cookie-parser": "^1.4.1",
     "cors": "^2.8.4",
-    "d3": "^4.13.0",
-    "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.1",

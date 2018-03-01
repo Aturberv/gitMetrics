@@ -12,36 +12,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/teamFirrre/scratch-project-fire.git"
+    "url": "git+https://github.com/IterationDeep/gitMetrics"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.14.2",
-    "bootstrap": "^4.0.0",
-    "chai": "^3.5.0",
     "cookie-parser": "^1.4.1",
-    "cors": "^2.8.4",
-    "d3": "^4.13.0",
-    "ejs": "^2.4.1",
     "express": "^4.13.4",
-    "express-session": "^1.15.6",
-    "jsonwebtoken": "^8.1.1",
-    "mocha": "^2.4.5",
     "mongoose": "4.4.1",
     "node-fetch": "^2.0.0",
-    "passport": "^0.4.0",
-    "passport-oauth2": "^1.4.0",
-    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
-    "react-d3-components": "^0.9.0",
     "react-dom": "^16.2.0",
-    "react-router-dom": "^4.2.2",
-    "redis": "^2.4.2",
-    "sinon": "^1.17.3",
-    "supertest": "^1.1.0"
+    "react-vis": "^1.8.3"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -49,19 +33,13 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.10",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.9",
-    "image-webpack-loader": "^4.1.0",
     "less": "^3.0.1",
     "less-loader": "^4.0.5",
     "node-sass": "^4.7.2",
     "nodemon": "^1.15.1",
-    "prettier": "1.10.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
-    "url-loader": "^0.6.2",
     "webpack": "^3.11.0",
     "webpack-dev-server": "^2.9.4"
   }

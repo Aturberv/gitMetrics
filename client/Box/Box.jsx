@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import './Box.css'
 
 
-// const divStyle = {
-//   background-color: 'blue',
-// };
 
 
 
@@ -14,7 +11,6 @@ function Box(props) {
     getCurrent,
     item
   } = props;
-
 
   return (
     <Col
@@ -26,10 +22,8 @@ function Box(props) {
             <img
               alt={item.name}
               className="img-responsive repo-img"
-              src={`${item.avatar}`}
-              onClick={() => {
-                getCurrent(item)
-              }}
+              src={ item.avatar_url ? `${item.avatar_url}` : "https://avatars1.githubusercontent.com/u/2735905?s=400&v=4"}
+
             />
         </div>
 
@@ -37,29 +31,19 @@ function Box(props) {
           className="ellipsis"
           title={item.name}
           >
-          <a href={`${item.url}`}>
+          <a
+            onClick={() => {
+              getCurrent(item)
+            }}>
             {item.name}
           </a>
         </h4>
-
-        <h5
-          className="ellipsis repo-brand-name"
-          title={item.name}>
-        </h5>
-
-        <div className="pull-right h4 repo-link">
-          {`${item.name}`}
-        </div>
 
       </Panel>
     </Col>
 
   );
 }
-
-// Repo.propTypes = {
-//   repo: React.PropTypes.object.isRequired
-// };
 
 
 export default Box;

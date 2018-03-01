@@ -3,17 +3,12 @@ import List from './List/List.jsx'
 import React, { Component } from 'react';
 import ReactDom from "react-dom";
 import { Grid } from 'react-bootstrap';
-import Routes from './Routes.jsx';
-import axios from 'axios';
 import Aggregate from './Aggregate/Aggregate.jsx'
-// import {
-//   Route,
-//   NavLink,
-//   HashRouter
-// } from "react-router-dom";
+import './app.css';
 
 
-// import RepoList from "../RepoList/RepoList.jsx";
+
+
 import RepoDetails from "./RepoDetails/Details.jsx";
 
 
@@ -52,22 +47,25 @@ class App extends Component {
   render() {
     return (
       <div>
+	      <Header />
         {
 					this.state.currentRepo ?
 						<RepoDetails details={this.state.currentRepo} />
 					:
 					(
           this.state.currentOrg ?
-            <div>
-              <Header />
-							<Aggregate />
+						<div className="rowOrg">
+						  <div className="columnOrg orgleft">
+						    <Aggregate orgStats={this.state.currentOrg}/>
+						  </div>
+						  <div className="columnOrg orgright">
 								<Grid id="content">
-	                <List getCurrent={this.getCurrentRepo} items={this.state.currentOrg.repos} />
-	              </Grid>
-            </div>
+									<List getCurrent={this.getCurrentRepo} items={this.state.currentOrg.repos} />
+								</Grid>
+						  </div>
+						</div>
             :
             <div>
-              <Header />
               <Grid id="content">
                 <List getCurrent={this.getCurrentOrg} items={this.state.orgs} />
               </Grid>

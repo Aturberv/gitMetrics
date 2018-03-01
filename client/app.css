@@ -1,0 +1,19 @@
+.columnOrg {
+    float: left;
+}
+
+/* Clear floats after the columns */
+.orgleft {
+  margin-left: 3%;
+  width: 17%;
+}
+
+.orgright {
+  width: 80%;
+}
+
+.rowOrg:after {
+    content: "";
+    display: table;
+    clear: both;
+}

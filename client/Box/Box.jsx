@@ -44,15 +44,6 @@ function Box(props) {
           </a>
         </h4>
 
-        <h5
-          className="ellipsis repo-brand-name"
-          title={item.name}>
-        </h5>
-
-        <div className="pull-right h4 repo-link">
-          {`${item.name}`}
-        </div>
-
       </Panel>
     </Col>
 
